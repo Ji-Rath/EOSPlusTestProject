@@ -130,7 +130,7 @@ void UFindSessionsCallbackProxyAdvanced::Activate()
 			default:
 			{
 				// Only steam uses the separate searching flags currently
-				if (IOnlineSubsystem::DoesInstanceExist("STEAM"))
+				if (IOnlineSubsystem::DoesInstanceExist("STEAM") || IOnlineSubsystem::DoesInstanceExist("EOS"))
 				{
 					bRunSecondSearch = true;
 

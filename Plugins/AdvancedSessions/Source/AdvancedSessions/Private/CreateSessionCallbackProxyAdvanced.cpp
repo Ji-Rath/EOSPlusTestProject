@@ -52,28 +52,24 @@ void UCreateSessionCallbackProxyAdvanced::Activate()
 			FOnlineSessionSettings Settings;
 			Settings.NumPublicConnections = NumPublicConnections;
 			Settings.NumPrivateConnections = NumPrivateConnections;
-			Settings.bShouldAdvertise = true;
+			Settings.bShouldAdvertise = bShouldAdvertise;
 			Settings.bAllowJoinInProgress = true;
 			Settings.bIsLANMatch = bUseLAN;
-			Settings.bAllowJoinViaPresence = true;
+			Settings.bAllowJoinViaPresence = bAllowJoinViaPresence;
 			Settings.bIsDedicated = bDedicatedServer;
-
-			if (bDedicatedServer)
-			{
-				Settings.bUsesPresence = false;
-				Settings.bUseLobbiesIfAvailable = false;
-			}
-			else
-			{
-				Settings.bUsesPresence = bUsePresence;
-				Settings.bUseLobbiesIfAvailable = bUseLobbiesIfAvailable;
-			}
-
-			Settings.bUseLobbiesVoiceChatIfAvailable = bUseLobbiesIfAvailable ? bUseLobbiesVoiceChatIfAvailable : false;
 			Settings.bAllowJoinViaPresenceFriendsOnly = bAllowJoinViaPresenceFriendsOnly;
 			Settings.bAntiCheatProtected = bAntiCheatProtected;
 			Settings.bUsesStats = bUsesStats;
-			Settings.bShouldAdvertise = bShouldAdvertise;
+			Settings.bUsesPresence = bUsePresence;
+			Settings.bUseLobbiesIfAvailable = bUseLobbiesIfAvailable;
+			Settings.bUseLobbiesVoiceChatIfAvailable = bUseLobbiesIfAvailable ? bUseLobbiesVoiceChatIfAvailable : false;
+
+			// Automatically change settings so the dedicated server can be created without error
+			if (bDedicatedServer)
+			{
+				Settings.bUsesPresence = false;
+				Settings.bAllowJoinViaPresence = false;
+			}
 
 			// These are about the only changes over the standard Create Sessions Node
 			Settings.bAllowInvites = bAllowInvites;
