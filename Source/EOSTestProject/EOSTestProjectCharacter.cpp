@@ -8,6 +8,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "VoiceChat.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AEOSTestProjectCharacter
@@ -136,5 +137,18 @@ void AEOSTestProjectCharacter::MoveRight(float Value)
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 		// add movement in that direction
 		AddMovementInput(Direction, Value);
+	}
+}
+
+void AEOSTestProjectCharacter::SetVoiceOutput(bool bEnabled)
+{
+	IVoiceChat* VoiceChat = IVoiceChat::Get();
+	if (VoiceChat)
+	{
+		VoiceChat->SetAudioInputDeviceMuted(!bEnabled);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Unable to get Voice Chat interface!"));
 	}
 }

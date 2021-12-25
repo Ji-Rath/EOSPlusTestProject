@@ -1,0 +1,1 @@
+start "" "D:\Program Files\Epic Games\UE_4.27\Engine\Binaries\Win64\UE4Editor.exe" "D:\Users\garet\Documents\Git\UEProjects\EOSPlusTestProject\EOSTestProject.uproject" -server -log -AUTH_TYPE=deviceid -AUTH_LOGIN=test -AUTH_TOKEN=test
